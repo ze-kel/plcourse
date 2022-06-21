@@ -74,18 +74,12 @@ val first_answer = fn somer => fn list => let
 
 val all_answers = fn somer => let
 									fun folder (el, acc) = case (somer(el), acc) of
-															(NONE, SOME[]) => NONE
-															| (NONE, _ ) => acc
+															(NONE, _) => NONE
+															| (_, NONE) => NONE
 															| (SOME resp, SOME v) => SOME (v @ resp)
-															| (SOME resp, _) => SOME resp
 									in
 									List.foldl(folder) (SOME [])
 									end
-
-val test8 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7]
-val test9 = all_answers (fn x => if x > 1 then SOME [x] else NONE) [2,3,4,5,6,7]
-
-val test10 = all_answers (fn x => if x < 4 then SOME [x] else NONE) [2,3,4,5,6,7]
 
 val count_wildcards = g (fn _ => 1) (fn _ => 0)
 
